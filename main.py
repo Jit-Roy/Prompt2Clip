@@ -513,6 +513,7 @@ class ClipExtractor:
             }}
         ]
 
+        CRITICAL: Make sure the JSON is perfectly valid. Do not use unescaped double quotes inside the reason string. Do not leave trailing commas.
         Return ONLY valid JSON, nothing else."""
         
         return prompt
@@ -556,14 +557,31 @@ class ClipExtractor:
             
         except Exception as e:
             print(f"[LLM] Failed to parse response: {e}")
-            return []
+            raise e
     
     def _fallback_ranking(self, candidates, user_query):
         """Fallback to simple score-based ranking if LLM fails."""
-        # Extract number from query if present
         import re
+        
+        # Default number of clips
+        n_clips = 5
+        
+        # Extract number from query if present
         match = re.search(r'\d+', user_query)
-        n_clips = int(match.group()) if match else 5
+        if match:
+            n_clips = int(match.group())
+        else:
+            # Fallback to word matching
+            lower_query = user_query.lower()
+            word_map = {
+                'single': 1, 'one': 1, 'two': 2, 'three': 3,
+                'four': 4, 'five': 5, 'six': 6, 'seven': 7,
+                'eight': 8, 'nine': 9, 'ten': 10
+            }
+            for word, num in word_map.items():
+                if re.search(r'\b' + word + r'\b', lower_query):
+                    n_clips = num
+                    break
         
         return candidates[:n_clips]
     

@@ -358,7 +358,12 @@ class ClipWorker(QThread):
         def _phase(idx, fn, *args, **kwargs):
             self.phase_started.emit(idx, PHASE_NAMES[idx])
             try:
-                buf = StringIO()
+                class TerminalTee(StringIO):
+                    def write(self, s):
+                        super().write(s)
+                        sys.__stdout__.write(s)
+                        sys.__stdout__.flush()
+                buf = TerminalTee()
                 with redirect_stdout(buf):
                     result = fn(*args, **kwargs)
                 if buf.getvalue():
