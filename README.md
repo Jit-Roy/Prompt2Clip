@@ -1,4 +1,4 @@
-# Clipz - Turn long videos into viral clips automatically.
+# Prompt2Clip - Turn long videos into viral clips automatically.
 
 ![Viral Clip Extractor](docs/img.png)
 
@@ -16,7 +16,7 @@
 
 <p align="center">
   <a href="#quick-start">⚡ Quick Start</a> •
-  <a href="#-why-clipz">🤔 Why Clipz?</a> •
+  <a href="#-why-Prompt2Clip">🤔 Why Prompt2Clip?</a> •
   <a href="#features">✨ Features</a> •
   <a href="#api-reference">📚 API</a> •
   <a href="#future-roadmap">🚀 Roadmap</a>
@@ -24,14 +24,14 @@
 
 ---
 
-## 🤔 Why Clipz?
+## 🤔 Why Prompt2Clip?
 
 Many existing clip tools already do a great job with:
 - audio-based excitement detection  
 - visual motion & scene analysis  
 - even basic LLM-assisted highlight detection  
 
-**Clipz goes one step further — it’s instruction-driven.**
+**Prompt2Clip goes one step further — it’s instruction-driven.**
 
 Instead of passively finding “hot moments,” you tell the system *what you want*:
 - *“Extract the funniest moments”*
